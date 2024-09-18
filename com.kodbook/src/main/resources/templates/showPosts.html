@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <h1>Post Details</h1>
+    <div class="profile-details">
+        <!-- Iterate through allPosts -->
+        <span th:each="post : ${allPosts}">
+            <p><strong>Photo:</strong></p>
+            <!-- Display the image if the photoBase64 exists -->
+            <img th:if="${post.photo != null}" 
+                 th:src="'data:image/jpeg;base64,' + ${post.photoBase64}" 
+                 alt="Profile Photo" />
+            <p><strong>Caption:</strong>
+                <span th:text="${post.caption}"></span>
+            </p>
+        </span>
+    </div>
+</body>
+</html>
