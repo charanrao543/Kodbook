@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kodbook.entity.Post;
+import com.kodbook.entity.User;
 import com.kodbook.service.PostService;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.kodbook.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -21,10 +25,20 @@ public class PostController {
 	@Autowired
 	PostService service;
 	
+	@Autowired
+	UserService userService;
+	
 	@PostMapping("/createPost")
 	public String createPost(@RequestParam("caption") String caption,
-			@RequestParam("photo")MultipartFile photo, Model model) {
+			@RequestParam("photo")MultipartFile photo, Model model, HttpSession session) {
+		
+		String username = (String) session.getAttribute("username");
+		User user = userService.getUser(username);
+		
 		Post post = new Post();
+		//updating post object
+		post.setUser(user);
+		
 		post.setCaption(caption);
 		try {
 			post.setPhoto(photo.getBytes());
@@ -32,6 +46,15 @@ public class PostController {
 			e.printStackTrace();
 		}
 		service.createPost(post);
+		//updating user object
+		List<Post> posts = user.getPosts();
+		if(posts == null) {
+			posts = new ArrayList<Post>();
+		}
+		posts.add(post);
+		user.setPosts(posts);
+		userService.updateUser(user);
+		
 		
 		List<Post> allposts =service.fetchAllPosts();
 		model.addAttribute("allposts",allposts);
