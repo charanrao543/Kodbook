@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kodbook.entity.Post;
+import com.kodbook.entity.User;
 import com.kodbook.service.PostService;
 import com.kodbook.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -40,10 +43,10 @@ public class NavController {
 			return "home";
 	}
 	@GetMapping("/openMyProfile")
-	public String openMyProfile(/*Model model, HttpSession session*/) {
-//		String username = (String) session.getAttribute("username");
-//		User user = service.getUser(username);
-//		model.addAttribute("user", user);
+	public String openMyProfile(Model model, HttpSession session) {
+		String username = (String) session.getAttribute("username");
+		User user = service.getUser(username);
+		model.addAttribute("user", user);
 		return "myProfile";
 	}
 	

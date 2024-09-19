@@ -23,7 +23,7 @@ public class PostController {
 	
 	@PostMapping("/createPost")
 	public String createPost(@RequestParam("caption") String caption,
-			@RequestParam("photo")MultipartFile photo) {
+			@RequestParam("photo")MultipartFile photo, Model model) {
 		Post post = new Post();
 		post.setCaption(caption);
 		try {
@@ -32,6 +32,9 @@ public class PostController {
 			e.printStackTrace();
 		}
 		service.createPost(post);
+		
+		List<Post> allposts =service.fetchAllPosts();
+		model.addAttribute("allposts",allposts);
 		
 		return "home";
 	}

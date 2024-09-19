@@ -8,9 +8,11 @@
 <body>
     <nav>
     <span th:text="${session.username}"></span>
-        <a href="#">News feed</a>
-        <a href="/openCreatePost">Create post</a>
-        <a href="/openMyProfile">My profile</a>
+         <a href="/goHome"><i class="fas fa-home"></i> News feed</a>
+        <a href="/openCreatePost"><i class="fas fa-plus-circle"></i> Create post</a>
+        <a href="/openMyProfile"><i class="fas fa-user-circle"></i> My profile</a>
+        <a href="/openEditProfile"><i class="fas fa-edit"></i> Edit profile</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> LogOut</a>
     </nav>
     
     <div class="profile-details">
