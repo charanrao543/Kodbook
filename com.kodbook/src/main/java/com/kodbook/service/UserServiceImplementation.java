@@ -24,7 +24,8 @@ public class UserServiceImplementation implements UserService{
 		User user1 = repo.findByUsername(username);
 		User user2 = repo.findByEmail(email);
 		
-		if(user1 != null || user2 != null) {
+		if(user1 != null || user2 != null  ) {
+			
 			return true;
 		}
 		return false;
@@ -34,7 +35,11 @@ public class UserServiceImplementation implements UserService{
 
 	@Override
 	public boolean validateUser(String username, String password) {
-
+			User username1 = repo.findByUsername(username);
+			if(username1 == null) {
+				return false;
+			}
+			
 			String db_password = repo.findByUsername(username).getPassword();
 			if(db_password.equals(password)) {
 				return true;

@@ -51,20 +51,23 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String username, @RequestParam String password, Model model,HttpSession session) {
+	
 		boolean status = service.validateUser(username, password);
-		if(status == true) {
-			List<Post> allPosts = postService.fetchAllPosts();
-			
-			session.setAttribute("username", username);
-			model.addAttribute("session",session);
-			
-			model.addAttribute("allPosts", allPosts);
-			return "home";
-		}
-		else {
-			return "index";
-		}
+			if(status == true) {
+				List<Post> allPosts = postService.fetchAllPosts();
+				
+				session.setAttribute("username", username);
+				model.addAttribute("session",session);
+				
+				model.addAttribute("allPosts", allPosts);
+				return "home";
+			}
+			else {
+				return "index";
+			}
 	}
+		
+	
 	
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {

@@ -16,6 +16,7 @@ h1 {
     font-size: 3em;
     text-align: center;
     margin-bottom: 0.2em;
+    
 }
 
 h3 {
@@ -36,6 +37,7 @@ form {
     background-color: white;
     border-radius: 15px;
     padding: 40px;
+    margin-top: 40px;
     width: 400px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -91,3 +93,5 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+
